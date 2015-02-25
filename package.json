@@ -1,0 +1,36 @@
+{
+  "name": "bonjsql",
+  "version": "0.1.0",
+  "description": "SQL Templating / Query generator with promises",
+  "homepage": "https://github.com/axbon/bonjsql",
+  "author": "Alexander Bonnevier <abonnevier@gmail.com> (https://github.com/axbon)",
+  "dependencies": {
+    "Q": "*"
+  },
+  "devDependencies": {
+    "qunit-cli": "*"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node_modules/qunit-cli/bin/qunit-cli test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Axbon/bonjsql.git"
+  },
+  "keywords": [
+    "postgres",
+    "mysql",
+    "sql",
+    "template",
+    "builder",
+    "promises"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Axbon/bonjsql/issues"
+  }
+}
