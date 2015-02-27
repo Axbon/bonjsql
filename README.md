@@ -28,12 +28,12 @@ var bonjsql = require('bonjsql');
 var queries = bonjsql.getQueries(db, 'path/to/sql/files');
 
 queries.getSomething({id: 1})
-       .then(function(rows){
-       		//Do something with rows
-       })
-       .catch(function(err){
-       	  //Handle errors
-       });
+ .then(function(rows){
+ 		//Do something with rows
+ })
+ .catch(function(err){
+ 	  //Handle errors
+ });
 ```
 
 Load the sql file "getSomething.sql", turn it into a
@@ -47,33 +47,33 @@ using promises to do something with the result and catch any errors.
 var queries = bonjsql.getQueries('path/to/sql/files');
 
 bonjsql.run(
-						queries.getA(),
-						queries.getB(),
-						queries.someOtherQuery()
-					)
-					.spread(function(a, b, c){
-						//Result rows a, b, c
-					})
-					.catch(function(err){
-						//Handle errors
-					})
+	queries.getA(),
+	queries.getB(),
+	queries.someOtherQuery()
+)
+.spread(function(a, b, c){
+	//Result rows a, b, c
+})
+.catch(function(err){
+	//Handle errors
+})
 ```
 
 You can also use "then" instead of "spread" when running multiple queries
 
 ```js
 bonjsql.run(
-						queries.getA(),
-						queries.getB(),
-						queries.someOtherQuery()
-					)
-					.then(function(arrResult){
-						// arrResult[0] => [rows...]
-					})
-					.catch(function(err){
-						//Handle errors
-					})
-``
+	queries.getA(),
+	queries.getB(),
+	queries.someOtherQuery()
+)
+.then(function(arrResult){
+	// arrResult[0] => [rows...]
+})
+.catch(function(err){
+	//Handle errors
+})
+```
 
 In the above example you will receive an Array of arrays instead of one argument for each result set.
 
@@ -81,7 +81,7 @@ In the above example you will receive an Array of arrays instead of one argument
 You can run the tests using the following command
 ```
 npm test
-``
+```
 
 ##Todo
 Find even better ways to compose queries using promises, perhaps even yield. Better support for other but similar DB adapters.
