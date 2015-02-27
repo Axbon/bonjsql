@@ -1,4 +1,4 @@
-## bonjsql
+# bonjsql
 
 Writing javascript and sql in the same file is horrible, which is why I created this
 tiny lib inspired by others such as yesql, jasql, preql, sqlt, amongst others.
@@ -11,7 +11,7 @@ is a function that you can execute to run a query on a given DB Adapter.
 
 Each of these query functions return promises (provided by [Q](https://github.com/kriskowal/q)).
 
-#Examples
+##Examples
 
 Assuming the following SQL exists in a file named getSomething.sql in 'path/to/files'
 
@@ -41,7 +41,7 @@ query, run it supplying the named parameter "id" with the value of 1,
 using promises to do something with the result and catch any errors.
 
 
-#Run several queries
+##Run several queries
 
 ```js
 var queries = bonjsql.getQueries('path/to/sql/files');
@@ -77,14 +77,14 @@ bonjsql.run(
 
 In the above example you will receive an Array of arrays instead of one argument for each result set.
 
-#Tests
+##Tests
 You can run the tests using the following command
 ```
 npm test
 ``
 
-#Todo
+##Todo
 Find even better ways to compose queries using promises, perhaps even yield. Better support for other but similar DB adapters.
 
-#License
+##License
 bonjsql is using the MIT license.
