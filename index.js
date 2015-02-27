@@ -1,9 +1,25 @@
-/*jshint node: true */
 'use strict';
 var fs = require('fs');
 var Q = require('q');
 
 
+/**
+ * Generate callback that rejects or resolve the promise based on the
+ * outcome of the query.
+ *
+ * @param {Object} deferred Q-deferred
+ * @private
+ * @return {Function}
+ */
+function handlePromise(deferred){
+	return function(err, rows){
+		if(err){
+			deferred.reject(err);
+		} else {
+			deferred.resolve(rows);
+		}
+	};
+}
 
 /**
  * Create a function that runs a query and returns
@@ -19,13 +35,11 @@ function getQueryFn(dbAdapter, path, file){
 	var strSql = fs.readFileSync(path + '/' + file, 'utf8');
 	var deferred = Q.defer();
 	return function(params){
-		dbAdapter.query(strSql, params, function(err, rows){
-			if(err){
-				deferred.reject(err);
-			} else {
-				deferred.resolve(rows);
-			}
-		});
+		if(params){
+			dbAdapter.query(strSql, params, handlePromise(deferred));
+		} else {
+			dbAdapter.query(strSql, handlePromise(deferred));
+		}
 		return deferred.promise;
 	};
 }

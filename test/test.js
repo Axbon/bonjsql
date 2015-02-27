@@ -20,7 +20,7 @@ QUnit.test('Loading queries from folder', function(assert){
 QUnit.test('Successful query', function(assert){
 	var done = assert.async();
 	var dbAdapterStub = {
-		query:function(strSql, params, fn){
+		query:function(strSql, fn){
 			//This query takes 200ms.
 			setTimeout(function(){
 				fn(null, [{id: 1}, {id: 2}]);
@@ -42,7 +42,7 @@ QUnit.test('Successful query', function(assert){
 QUnit.test('Failed query', function(assert){
 	var done = assert.async();
 	var dbAdapterStub = {
-		query:function(strSql, params, fn){
+		query:function(strSql, fn){
 			//This query takes 500ms.
 			setTimeout(function(){
 				fn('No connection to database', []);
@@ -64,6 +64,31 @@ QUnit.test('Failed query', function(assert){
 
 
 
+QUnit.test('Query parameters', function(assert){
+	var doneQueryCb = assert.async();
+	var donePromise = assert.async();
+	var dbAdapterStub = {
+		query:function(strSql, params, fn){
+			//This query takes 500ms.
+			setTimeout(function(){
+				assert.deepEqual(params, {name: 'John Doe'}, 'DB Adapter received correct params');
+				fn(null, [{id: 22, name: 'John Richard Doe'}]);
+				doneQueryCb();
+			}, 500);
+		}
+	};
+
+	var queries = bonjsql.getQueries(dbAdapterStub, __dirname + '/' + 'fixtures');
+
+	queries.getUserByName({name: 'John Doe'})
+				 .then(function(rows){
+				 		assert.deepEqual(rows, [{id: 22, name: 'John Richard Doe'}], 'Correct rows returned by query using params');
+				 		donePromise();
+				 });
+});
+
+
+
 
 QUnit.test('Multiple queries sequence - success', function(assert){
 	assert.expect(3);
@@ -71,7 +96,7 @@ QUnit.test('Multiple queries sequence - success', function(assert){
 	var doneThen = assert.async();
 
 	var dbAdapterStub = {
-		query:function(strSql, params, fn){
+		query:function(strSql, fn){
 			//This query takes 500ms.
 			var res = /name/g.test(strSql) ? [{name: 'John Doe', id: 1}] : [{name: 'Foo Bar', id: 2}];
 			setTimeout(function(){
