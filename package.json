@@ -5,7 +5,8 @@
   "homepage": "https://github.com/axbon/bonjsql",
   "author": "Alexander Bonnevier <abonnevier@gmail.com> (https://github.com/axbon)",
   "dependencies": {
-    "Q": "*"
+    "Q": "*",
+    "rx":"*"
   },
   "devDependencies": {
     "qunit-cli": "*"
