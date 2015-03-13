@@ -1,6 +1,6 @@
 # bonjsql
 
-Writing applications at scale using javascript can be a daunting task. It can be hard
+Writing large applications using javascript can be a daunting task. It can be hard
 to manage the infamous "callback hell". Working with databases on the backend is
 usually challenging because of async management.
 
@@ -41,10 +41,10 @@ var queries = bonjsql.getQueries(db, 'path/to/sql/files');
 
 queries.getSomething({id: 1})
  .then(function(rows){
- 		//Do something with rows
+ 	//Do something with rows
  })
  .catch(function(err){
- 	  //Handle errors
+  //Handle errors
  });
 ```
 
@@ -127,7 +127,7 @@ Using ES6 and arrow functions the above code becomes even more elegant:
 mapper
 	.getSomething({id: 1})
 	.flatMap(rx.Observable.from)
-	.map((result) => {
+	.map(result => {
 		return {
 			id: result.id,
 			name: result.name.charAt(0).toUpperCase() + result.name.slice(1)
