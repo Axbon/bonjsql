@@ -1,15 +1,7 @@
 # bonjsql
 
-Writing large applications using javascript can be a daunting task. It can be hard
-to manage the infamous "callback hell". Working with databases on the backend is
-usually challenging because of async management.
-
-Here I explore different approaches that can be used to tackle this problem, in this
-particular case writing sql and performing database queries efficiently.
-
-The first problem you stumble upon is to keep javascript and sql in the same file(s).
-It is not pretty, which is why we should avoid that at all costs. Inspired by other libs such
-as yesql, jasql, preql, sqlt, bonjsql provides a way to generate query-functions
+Keeping javascript and sql in the same file(s) is not pretty, which is why we should avoid that at all costs.
+Inspired by other libs such as yesql, jasql, preql, sqlt, bonjsql provides a way to generate query-functions
 from simple .sql files. SQL Templating if you will.
 
 I run this together with modules like [node-pg](https://github.com/sehrope/node-pg-db)
@@ -120,7 +112,7 @@ mapper
 	});
 ```
 
-Using ES6 and arrow functions the above code becomes even more elegant:
+Using ES6 and arrow functions the above code becomes more minimalistic:
 
 ```js
 
